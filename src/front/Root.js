@@ -24,7 +24,12 @@ const MainApp = compose(withMainLayout())(MainRoutes);
 const store = configureStore();
 // #endregion
 
+type Props = {
+  history: any,
+};
 class Root extends Component<Props, State> {
+  static propTypes = {};
+
   render() {
     return (
       <Provider store={store}>
@@ -40,4 +45,5 @@ class Root extends Component<Props, State> {
     );
   }
 }
+
 export default Root;

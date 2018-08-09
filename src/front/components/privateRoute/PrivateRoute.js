@@ -52,10 +52,10 @@ class PrivateRoute extends Component<Props, State> {
   // #endregion
 
   isAuthenticated() {
-    const checkUserHasId = user => user && user.id;
-    const user = auth.getUserInfo() ? auth.getUserInfo() : null;
-    const isAuthenticated = auth.getToken() && checkUserHasId(user);
-    return isAuthenticated;
+    // const checkUserHasId = user => user && user.id;
+    // const user = auth.getUserInfo() ? auth.getUserInfo() : null;
+    // return auth.isAuthenticated();
+    return true;
   }
 
   isExpired() {

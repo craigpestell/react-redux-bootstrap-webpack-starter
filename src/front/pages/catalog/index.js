@@ -4,20 +4,23 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import compose from 'recompose/compose';
-import Home from './Home';
+import Catalog from './Catalog';
+import { catalogActions } from '../../redux/modules/catalog';
 import withEnterAnimation from '../../hoc/withEnterAnimation';
-import auth from '../../services/auth';
-import { authActions } from '../../redux/modules/auth';
-
 // #endregion
-
+console.log('catalogActions:', catalogActions);
 // #region redux map state and dispatch to props
-const mapStateToProps = ({ auth }) => ({
-  auth,
-});
+const mapStateToProps = state => {
+  return { catalog: state.catalog };
+};
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ authActions }, dispatch);
+  return bindActionCreators(
+    {
+      ...catalogActions,
+    },
+    dispatch,
+  );
 };
 // #endregion
 
@@ -27,4 +30,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-)(Home);
+)(Catalog);

@@ -2,6 +2,7 @@
 
 // #region imports
 import React, { PureComponent } from 'react';
+import * as auth from '../../services/auth';
 import Humburger from './humburger/Humburger';
 import LeftNav from './leftNav/LeftNav';
 import RightNav from './rightNav/RightNav';
@@ -11,11 +12,11 @@ import {
   type OnRightNavButtonClick,
 } from './rightNav/RightNav';
 // #endregion
-
+import AuthType from '../../services/auth/type';
 // #region flow types
 export type Props = {
+  auth: AuthType,
   brand: string,
-
   handleLeftNavItemClick: OnLeftNavButtonClick,
   handleRightNavItemClick: OnRightNavButtonClick,
 
@@ -31,11 +32,12 @@ export type State = any;
 // #endregion
 
 class NavigationBar extends PureComponent<Props, State> {
-  static defaultProps = { brand: 'brand' };
+  static defaultProps = { brand: 'brand', authService: auth };
 
   // #region life cycle
   render() {
     const {
+      authService,
       brand,
       navModel,
       handleLeftNavItemClick,
@@ -61,14 +63,14 @@ class NavigationBar extends PureComponent<Props, State> {
                 />
               }
             </ul>
-            <ul className="nav navbar-nav navbar-right">
-              {
-                <RightNav
-                  rightLinks={navModel.rightLinks}
-                  onRightNavButtonClick={handleRightNavItemClick}
-                />
-              }
-            </ul>
+            {
+              <RightNav
+                rightLinks={navModel.rightLinks}
+                onRightNavButtonClick={handleRightNavItemClick}
+                AuthService={authService}
+                {...this.props}
+              />
+            }
           </div>
         </div>
       </nav>

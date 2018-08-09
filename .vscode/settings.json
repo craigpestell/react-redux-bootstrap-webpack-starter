@@ -1,0 +1,19 @@
+{
+    "files.defaultLanguage": "javascriptreact",
+    "files.associations": {"*.js": "javascriptreact"},
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    // Use 'prettier-eslint' instead of 'prettier'. Other settings will only be fallbacks in case they could not be inferred from eslint rules.
+    "prettier.eslintIntegration": true,
+    "prettier.stylelintIntegration": true,
+    "editor.formatOnSave": true,
+    // disable editor formatting, so eslint can handle it
+    //"[typescriptreact]": {
+    //    "editor.formatOnSave": false,
+    //},
+    // available through eslint plugin in vscode
+    "eslint.autoFixOnSave": true,
+    "eslint.alwaysShowStatus": true
+
+}

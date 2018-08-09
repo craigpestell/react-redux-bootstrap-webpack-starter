@@ -24,6 +24,12 @@ const navigation = {
       link: '/',
     },
     {
+      label: 'Catalog',
+      link: '/catalog',
+      // view: 'protected',
+      isRouteBtn: true,
+    },
+    {
       label: 'Protected',
       link: '/protected',
       view: 'protected',
@@ -36,7 +42,7 @@ const navigation = {
       isRouteBtn: true,
     },
     {
-      label: 'Disconnect',
+      label: 'login',
       link: '/login',
       view: 'login',
       isRouteBtn: true,

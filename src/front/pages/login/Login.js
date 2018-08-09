@@ -8,7 +8,7 @@ import {
   type RouterHistory,
 } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
-import auth from '../../services/auth';
+import * as AuthService from '../../services/auth';
 // #endregion
 
 // #region flow types
@@ -17,13 +17,14 @@ export type Props = {
   match: Match,
   location: Location,
   history: RouterHistory,
-
+  AuthService: () => any,
   // userAuth:
   isAuthenticated: boolean,
   isFetching: boolean,
   isLogging: boolean,
-  disconnectUser: () => any,
-  logUserIfNeeded: () => any,
+  auth: () => any,
+  loginRequest: () => any,
+  loginSuccess: () => any,
 };
 
 export type State = {
@@ -42,7 +43,16 @@ class Login extends PureComponent<Props, State> {
     email: '',
     password: '',
   };
+  handleLoginClick = () => {
+    AuthService.login();
+    this.props.loginRequest();
+  };
 
+  handleLogoutClick = () => {
+    this.props.logoutSuccess();
+    AuthService.logout(); // careful, this is a static method
+    this.props.history.push({ pathname: '/' });
+  };
   // #region lifecycle methods
   componentDidMount() {
     const { disconnectUser } = this.props;
@@ -102,21 +112,22 @@ class Login extends PureComponent<Props, State> {
                 </div>
                 <div className="form-group">
                   <Col lg={10} lgOffset={2}>
-                    <Button
-                      className="login-button btn-block"
-                      bsStyle="primary"
-                      disabled={isLogging}
-                      onClick={this.handlesOnLogin}
-                    >
-                      {isLogging ? (
-                        <span>
-                          login in... &nbsp;
-                          <i className="fa fa-spinner fa-pulse fa-fw" />
-                        </span>
-                      ) : (
-                        <span>Login</span>
-                      )}
-                    </Button>
+                    {AuthService.isAuthenticated ? (
+                      <div>
+                        <img
+                          src={auth.profile.picture}
+                          height="40px"
+                          alt="profile"
+                        />
+                        <span>Welcome, {AuthService.profile.nickname}</span>
+                        <button onClick={this.handleLogoutClick}>Logout</button>
+                      </div>
+                    ) : (
+                      <button onClick={this.handleLoginClick}>Login</button>
+                    )}
+                    {AuthService.error && (
+                      <p>{JSON.stringify(AuthService.error)}</p>
+                    )}
                   </Col>
                 </div>
               </fieldset>

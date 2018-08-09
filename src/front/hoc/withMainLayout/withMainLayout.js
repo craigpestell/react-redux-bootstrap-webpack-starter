@@ -2,15 +2,18 @@
 
 // #region imports
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import wrapDisplayName from 'recompose/wrapDisplayName';
 import compose from 'recompose/compose';
 import { withRouter } from 'react-router';
 import { type Match, type Location, type RouterHistory } from 'react-router';
+import * as AuthService from '../../services/auth';
 import NavigationBar from '../../components/navigation/NavigationBar';
 import BackToTop from '../../components/backToTop/BackToTop';
 import navigationModel from '../../config/navigation';
 import { type Navigation } from '../../config/navigation';
 import registerServiceWorker from '../../services/sw/registerServiceWorker';
+import { authActions } from '../../redux/modules/auth';
 // #endregion
 
 // #region flow types
@@ -19,7 +22,8 @@ type Props = {
   match: Match,
   location: Location,
   history: RouterHistory,
-
+  loginError: any,
+  loginSuccess: any,
   ...any,
 };
 
@@ -44,7 +48,30 @@ function withMainLayout(/* no args option yet, but could pass them here */) {
           registerServiceWorker();
         }
       }
-
+      UNSAFE_componentWillMount() {
+        const { history, loginError, loginSuccess } = this.props;
+        // Add callback for lock's `authenticated` event
+        AuthService.lock.on('authenticated', authResult => {
+          AuthService.lock.getUserInfo(
+            authResult.accessToken,
+            (error, profile) => {
+              if (error) {
+                return loginError(error);
+              }
+              AuthService.setToken(authResult.idToken); // static method
+              AuthService.setProfile(profile); // static method
+              loginSuccess(profile);
+              history.push({ pathname: '/' });
+              AuthService.lock.hide();
+            },
+          );
+        });
+        // Add callback for lock's `authorization_error` event
+        AuthService.lock.on('authorization_error', error => {
+          loginError(error);
+          history.push({ pathname: '/' });
+        });
+      }
       render() {
         /* eslint-disable no-unused-vars */
         const { history, location, match, ...passProps } = this.props;
@@ -90,8 +117,23 @@ function withMainLayout(/* no args option yet, but could pass them here */) {
     }
     /* eslint-enable no-process-env */
     // #endregion
+    const mapStateToProps = ({ auth }) => ({
+      auth,
+    });
 
-    return compose(withRouter)(WithMainLayout);
+    const mapDispatchToProps = dispatch => ({
+      loginSuccess: () => dispatch(authActions.loginSuccess()),
+      loginError: () => dispatch(authActions.loginError()),
+    });
+
+    return compose(
+      withRouter(
+        connect(
+          mapStateToProps,
+          mapDispatchToProps,
+        )(WithMainLayout),
+      ),
+    );
   };
 }
 // #endregion

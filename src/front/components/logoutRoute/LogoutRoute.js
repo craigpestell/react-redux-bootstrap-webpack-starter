@@ -8,11 +8,23 @@ import {
   type Location,
   type RouterHistory,
 } from 'react-router-dom';
-import auth from '../../services/auth';
+import * as AuthService from '../../services/auth';
 // #endregion
+
+const handleLogin = () => {
+  AuthService.login();
+  this.props.loginRequest();
+};
+
+const handleLogout = () => {
+  this.props.logoutSuccess();
+  AuthService.logout(); // careful, this is a static method
+  this.props.history.push({ pathname: '/' });
+};
 
 // #region flow types
 type Props = {
+  logoutSuccessHandler: any,
   // react-router 4:
   match: Match,
   location: Location,
@@ -20,13 +32,18 @@ type Props = {
 
   ...any,
 };
-type State = any;
+
+type State = {
+  logoutSuccessHandler: null,
+  handleLogin: handleLogin,
+  handleLogout: handleLogout,
+};
 // #endregion
 
 class LogoutRoute extends PureComponent<Props, State> {
   // #region lifecycle
   componentDidMount() {
-    auth.clearAllAppStorage();
+    // auth.clearAllAppStorage();
   }
 
   render() {

@@ -1,18 +1,18 @@
 // @flow
 
 export const appConfig = {
-  DEV_MODE: true, // block fetch
+    DEV_MODE: true, // block fetch
 
-  // api endpoints:
-  api: {
-    fakeEndPoint: 'api/somewhere',
-    users: 'api/someusersapi',
-  },
+    // api endpoints:
+    api: {
+        fakeEndPoint: 'api/somewhere',
+        users: 'api/someusersapi',
+    },
 
-  // sw path
-  sw: {
-    path: 'public/assets/sw.js',
-  },
+    // sw path
+    sw: {
+        path: 'assets/sw.js',
+    },
 };
 
 export default appConfig;
