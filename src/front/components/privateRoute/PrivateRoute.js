@@ -8,7 +8,7 @@ import {
   type Location,
   type RouterHistory,
 } from 'react-router-dom';
-import auth from '../../services/auth';
+import * as AuthService from '../../services/auth';
 // #endregion
 
 // #region flow types
@@ -59,7 +59,7 @@ class PrivateRoute extends Component<Props, State> {
   }
 
   isExpired() {
-    return auth.isExpiredToken(auth.getToken());
+    return AuthService.isExpiredToken(AuthService.getToken());
   }
 }
 

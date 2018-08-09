@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
 // import styles from './styles.scss';
+//           /* {`${match.url}/5b54302457a3bd602420c8fd`} */
 
 type Props = { list: Array<Object> };
 
@@ -14,9 +15,6 @@ export default ({ list }: Props) => (
     <h3>Catalog list</h3>
     <pre />
     <ul>
-      {_.map(list.data.workOrders, ({ _id, name, catalogLabel }) => {
-        console.log(list);
-      })}
       {_.map(list.data.workOrders, ({ _id, name, catalogLabel }) => (
         <li key={_id}>
           <Link to={`/catalog/${_id}`}>{catalogLabel}</Link>

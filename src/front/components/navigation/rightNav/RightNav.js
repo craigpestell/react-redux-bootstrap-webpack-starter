@@ -63,8 +63,8 @@ class RightNav extends React.Component {
       <ul className="nav navbar-nav navbar-right">
         {rightLinks
           .filter(obj => {
-            console.log('AuthService:', AuthService.isAuthenticated);
-            console.log('obj:', obj);
+            // console.log('AuthService:', AuthService.isAuthenticated);
+            // console.log('obj:', obj);
 
             return true;
           })
