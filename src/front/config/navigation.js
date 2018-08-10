@@ -42,9 +42,15 @@ const navigation = {
       isRouteBtn: true,
     },
     {
+      label: 'Widgets',
+      link: '/widgets',
+      // view: 'Widgets',
+      isRouteBtn: true,
+    },
+    {
       label: 'login',
       link: '/login',
-      view: 'login',
+      // view: 'login',
       isRouteBtn: true,
     },
   ],

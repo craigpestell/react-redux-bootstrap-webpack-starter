@@ -52,7 +52,6 @@ export default class CatalogPage extends PureComponent<Props> {
     if (catalog.readyStatus === 'CATALOG_FAILURE') {
       return <p> Oops, Failed to load catalog list! </p>;
     }
-    console.log('catalog:', catalog);
 
     /* var linkList = catalog.list.data.workOrders.map(wo => {
       return (

@@ -7,9 +7,11 @@ import fakeModuleWithFetch from './fakeModuleWithFetch';
 import userAuth from './userAuth';
 import catalog from './catalog';
 import wo from './wo';
+import widgets from './widgets';
 // #endregion
 
 export const reducers = {
+  widgets,
   wo,
   catalog,
   fakeModuleWithFetch,

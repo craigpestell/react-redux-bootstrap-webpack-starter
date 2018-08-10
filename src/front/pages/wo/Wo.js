@@ -48,13 +48,6 @@ export default class WoPage extends React.PureComponent<Props> {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      'WO componentDidUpdate prevProps: ',
-      prevProps,
-      ' - prevState: ',
-      prevState,
-    );
-    const { dispatch } = this.props;
     const { pathname } = this.props.location;
     const { pathname: prevPathname } = prevProps.location;
 
@@ -70,7 +63,6 @@ export default class WoPage extends React.PureComponent<Props> {
     }
   }
   renderWo = () => {
-    console.log('renderWo props:', this.props);
     const { wo } = this.props;
 
     if (

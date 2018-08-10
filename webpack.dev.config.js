@@ -2,6 +2,7 @@
 
 const webpack = require('webpack');
 const path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const workboxPlugin = require('workbox-webpack-plugin');
 
@@ -38,6 +39,22 @@ const config = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.less$/,
+        loader:
+          'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap',
+      },
+      /* {
+        test: /\.scss$/,
+        loader:
+          'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass-loader?outputStyle=expanded&sourceMap',
+      },*/
+
+      {
+        test: /.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
         use: [
