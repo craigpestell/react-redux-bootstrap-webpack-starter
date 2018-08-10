@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
+// @flow
+import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+
 import widgetValidation, { colors } from './widgetValidation';
-import * as widgetActions from 'redux/modules/widgets';
 
 /*
 @connect(
@@ -17,21 +16,21 @@ import * as widgetActions from 'redux/modules/widgets';
   fields: ['id', 'color', 'sprocketCount', 'owner'],
   validate: widgetValidation
 }) */
-export default class WidgetForm extends Component {
-  static propTypes = {
-    fields: PropTypes.object.isRequired,
-    editStop: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    invalid: PropTypes.bool.isRequired,
-    pristine: PropTypes.bool.isRequired,
-    save: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired,
-    saveError: PropTypes.object,
-    formKey: PropTypes.string.isRequired,
-    values: PropTypes.object.isRequired,
-  };
-
+type Props = {
+  fields: PropTypes.object.isRequired,
+  editStop: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  invalid: PropTypes.bool.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  save: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  saveError: PropTypes.object,
+  formKey: PropTypes.string.isRequired,
+  values: PropTypes.object.isRequired,
+};
+class WidgetForm extends Component<Props> {
   render() {
+    debugger; // eslint-disable-line
     const {
       editStop,
       fields: { id, color, sprocketCount, owner },
@@ -101,3 +100,8 @@ export default class WidgetForm extends Component {
     );
   }
 }
+export default reduxForm({
+  form: 'widget',
+  fields: ['id', 'color', 'sprocketCount', 'owner'],
+  validate: widgetValidation,
+})(WidgetForm);

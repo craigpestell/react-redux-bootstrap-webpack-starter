@@ -58,7 +58,9 @@ export default class Widgets extends Component<Props> {
       const { editStart } = this.props; // eslint-disable-line no-shadow
       return () => editStart(String(widget.id));
     };
-    const { widgets, error, editing, loading, load } = this.props;
+
+    const { widgets: { editing } = {} } = this.props;
+    const { widgets } = this.props;
 
     if (
       !widgets.readyStatus ||
@@ -79,7 +81,7 @@ export default class Widgets extends Component<Props> {
       );
     });*/
     var linkList = <li>list here</li>;
-    if (widgets) {
+    if (widgets.data && widgets.data.widgets) {
       const styles = require('./Widgets.scss');
       return (
         <table className="table table-striped">
@@ -93,7 +95,7 @@ export default class Widgets extends Component<Props> {
             </tr>
           </thead>
           <tbody>
-            {widgets.map(
+            {widgets.data.widgets.map(
               widget =>
                 editing[widget.id] ? (
                   <WidgetForm
@@ -133,7 +135,11 @@ export default class Widgets extends Component<Props> {
   };
 
   render() {
-    const { widgets, error, editing, loading, load } = this.props;
+    console.log('props:', this.props);
+
+    const { widgets } = this.props;
+
+    const { error, editing, loading, load } = this.props;
     let refreshClassName = 'fa fa-refresh';
     if (loading) {
       refreshClassName += ' fa-spin';
@@ -150,7 +156,7 @@ export default class Widgets extends Component<Props> {
             <i className={refreshClassName} /> Reload Widgets
           </button>
         </h1>
-        <Helmet title="Widgets" />
+
         <p>
           If you hit refresh on your browser, the data loading will take place
           on the server before the page is returned. If you navigated here from
@@ -174,7 +180,10 @@ export default class Widgets extends Component<Props> {
             {error}
           </div>
         )}
-        {widgets && widgets.length && this.renderWidgets(widgets)}
+        {widgets &&
+          widgets.data &&
+          widgets.data.widgets &&
+          this.renderWidgets(widgets.data.widgets)}
       </div>
     );
   }
