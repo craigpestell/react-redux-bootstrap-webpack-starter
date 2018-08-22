@@ -1,7 +1,7 @@
 // @flow
 
 // #region imports
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Component, createElement as e } from 'react';
 import {
   type Match,
   type Location,
@@ -28,6 +28,20 @@ export type Props = {
 
 export type State = any;
 // #endregion
+
+const Foo = ({ text, ...props }) => e('span', props, text);
+
+const Bar = props => e('div', {}, e(Foo, { ...props, style: 'color: blue' }));
+
+class Baz extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { text: 'Baz-text' };
+  }
+  render() {
+    return e(Bar, { text: this.state.text });
+  }
+}
 
 class Home extends PureComponent<Props, State> {
   static defaultProps = { authService: auth };

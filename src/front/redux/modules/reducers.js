@@ -3,6 +3,7 @@
 // #region imports
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import fakeModuleWithFetch from './fakeModuleWithFetch';
 import userAuth from './userAuth';
 import catalog from './catalog';
@@ -16,6 +17,7 @@ export const reducers = {
   catalog,
   fakeModuleWithFetch,
   userAuth,
+  form: formReducer,
 };
 
 export default combineReducers({

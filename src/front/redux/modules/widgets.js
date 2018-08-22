@@ -2,14 +2,14 @@
 import type { Dispatch, GetState, ThunkAction, ReduxState } from './types';
 import axios from 'axios';
 
-const LOAD = 'redux-example/widgets/LOAD';
+const LOAD = 'widgets/LOAD';
 
-const LOAD_FAIL = 'redux-example/widgets/LOAD_FAIL';
-const EDIT_START = 'redux-example/widgets/EDIT_START';
-const EDIT_STOP = 'redux-example/widgets/EDIT_STOP';
-const SAVE = 'redux-example/widgets/SAVE';
-const SAVE_SUCCESS = 'redux-example/widgets/SAVE_SUCCESS';
-const SAVE_FAIL = 'redux-example/widgets/SAVE_FAIL';
+const LOAD_FAIL = 'widgets/LOAD_FAIL';
+const EDIT_START = 'widgets/EDIT_START';
+const EDIT_STOP = 'widgets/EDIT_STOP';
+const SAVE = 'widgets/SAVE';
+const SAVE_SUCCESS = 'widgets/SAVE_SUCCESS';
+const SAVE_FAIL = 'widgets/SAVE_FAIL';
 
 const initialState = {
   readyStatus: 'WIDGETS_INVALID',

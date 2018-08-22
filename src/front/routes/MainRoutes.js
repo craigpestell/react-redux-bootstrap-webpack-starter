@@ -10,7 +10,7 @@ import {
   PageNotFound,
   Protected,
   Catalog,
-  Widgets,
+  FieldArrays,
 } from './routes';
 import LogoutRoute from '../components/logoutRoute/LogoutRoute';
 import PrivateRoute from '../components/privateRoute/PrivateRoute';
@@ -22,7 +22,7 @@ const MainRoutes = () => {
       <Route exact path="/" component={Home} />
       <Route path="/catalog" component={Catalog} />
       <Route path="/about" component={About} />
-      <Route path="/widgets" component={Widgets} />
+      <Route path="/fieldArrays" component={FieldArrays} />
       <PrivateRoute path="/protected" component={Protected} />
       <LogoutRoute path="/logout" />
     </Switch>

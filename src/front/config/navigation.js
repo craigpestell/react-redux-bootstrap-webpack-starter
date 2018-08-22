@@ -16,7 +16,7 @@ export type Navigation = {
 // #endregion
 
 const navigation = {
-  brand: 'React Redux Bootstrap Starter',
+  brand: 'Zusa ',
   leftLinks: [],
   rightLinks: [
     {
@@ -44,6 +44,12 @@ const navigation = {
     {
       label: 'Widgets',
       link: '/widgets',
+      // view: 'Widgets',
+      isRouteBtn: true,
+    },
+    {
+      label: 'Field Arrays',
+      link: '/fieldArrays',
       // view: 'Widgets',
       isRouteBtn: true,
     },

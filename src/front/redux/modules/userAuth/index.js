@@ -174,7 +174,7 @@ export default function(state: State = initialState, action: Action): State {
 
 // #region disconnect user
 export function disconnectUser(): Action {
-  // auth.clearAllAppStorage();
+  auth.clearAllAppStorage();
   return { type: DISCONNECT_USER };
 }
 // #endregion

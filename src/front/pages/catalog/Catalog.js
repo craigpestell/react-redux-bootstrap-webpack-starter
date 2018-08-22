@@ -35,6 +35,8 @@ const woMock = () => (
 // Export this for unit testing more easily
 export default class CatalogPage extends PureComponent<Props> {
   componentDidMount() {
+    console.log('Catalog componentDidMount props:', this.props);
+
     const { fetchCatalogIfNeeded } = this.props;
     fetchCatalogIfNeeded();
   }

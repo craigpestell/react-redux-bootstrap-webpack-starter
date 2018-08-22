@@ -9,7 +9,7 @@ type State = Wo;
 const initialState = {
   readyStatus: 'WO_INVALID',
   err: null,
-  wo: { name: 'empty' },
+  wo: { data: [['_id', '123'], ['name', 'craig']] },
 };
 
 export default (state: State = initialState, action: Action): State => {

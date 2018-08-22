@@ -9,6 +9,8 @@ const injectGlobalStyle = () => injectGlobal`
     margin: 0;
     height: 100%;
     -webkit-font-smoothing: antialiased;
+    background-color: #2E3436;
+    color: #D3D7CF;
   }
 
   * {
